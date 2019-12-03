@@ -1,0 +1,7 @@
+*.iml
+target
+*/logs/*
+.idea/*
+src/main/no.finntech.topology.config.thrift.ini
+yammer-announcement.vm
+agent.log
