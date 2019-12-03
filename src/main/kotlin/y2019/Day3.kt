@@ -23,10 +23,7 @@ class Day3 {
     }
 
     fun calculateManhattenDistance(wires: Pair<List<String>, List<String>> ): Int? {
-
         val coordinates = Pair(findCoordinates(wires.first), findCoordinates(wires.second))
-
-
         val intersections = coordinates.first.intersect(coordinates.second)
 
         return intersections.filter { !(it.first == 0 && it.second == 0) }.map { getManhattenDistance(it) }.minBy { abs(it) }
@@ -34,7 +31,6 @@ class Day3 {
 
     fun findFewestSteps(wires: Pair<List<String>, List<String>>): Int {
         val coordinates = Pair(findCoordinates(wires.first), findCoordinates(wires.second))
-
         val intersections = coordinates.first.intersect(coordinates.second).filter { !(it.first == 0 && it.second == 0) }
 
         val stepsToIntersections = intersections.map {
@@ -51,77 +47,33 @@ class Day3 {
             val direction = it.first()
             val distance = it.substring(1).toInt()
 
-            coordinates = when(direction){
-                'U' -> moveUp(distance,coordinates)
-                'D' -> moveDown(distance,coordinates)
-                'R' -> moveRight(distance,coordinates)
-                'L' -> moveLeft(distance,coordinates)
-                else -> throw Exception("Unknown direction $direction")
-            }
+            coordinates = move(distance, direction, coordinates)
         }
 
         return coordinates
     }
 
-    private fun moveLeft(distance: Int, coordinates: List<Pair<Int, Int>>) : List<Pair<Int, Int>> {
+    private fun move(distance: Int, direction: Char, coordinates: List<Pair<Int, Int>>): List<Pair<Int, Int>> {
         val result = coordinates.toMutableList()
         var newCoordinates = coordinates.last()
 
         (0 until distance).map {
-            newCoordinates = newCoordinates.first - 1 to newCoordinates.second
-            result.add(newCoordinates)
-        }
-        return result
-    }
+            newCoordinates = when(direction){
+                'U' -> newCoordinates.first to newCoordinates.second + 1
+                'D' -> newCoordinates.first to newCoordinates.second - 1
+                'R' -> newCoordinates.first + 1 to newCoordinates.second
+                'L' -> newCoordinates.first - 1 to newCoordinates.second
+                else -> throw Exception("Unknown direction $direction")
+            }
 
-    private fun moveRight(distance: Int, coordinates: List<Pair<Int, Int>>) : List<Pair<Int, Int>> {
-        val result = coordinates.toMutableList()
-        var newCoordinates = coordinates.last()
-
-        (0 until distance).map {
-            newCoordinates = newCoordinates.first + 1 to newCoordinates.second
-            result.add(newCoordinates)
-        }
-        return result
-    }
-
-    private fun moveDown(distance: Int, coordinates: List<Pair<Int, Int>>) : List<Pair<Int, Int>> {
-        val result = coordinates.toMutableList()
-        var newCoordinates = coordinates.last()
-
-        (0 until distance).map {
-            newCoordinates = newCoordinates.first to newCoordinates.second - 1
-            result.add(newCoordinates)
-        }
-        return result
-    }
-
-    private fun moveUp(distance: Int, coordinates: List<Pair<Int, Int>>) : List<Pair<Int, Int>> {
-        val result = coordinates.toMutableList()
-        var newCoordinates = coordinates.last()
-
-        (0 until distance).map {
-            newCoordinates = newCoordinates.first to newCoordinates.second + 1
             result.add(newCoordinates)
         }
         return result
     }
 
     private fun getManhattenDistance(coordinates: Pair<Int, Int>): Int {
-        val centralPort = (0 to 0)
-
-        val winner = coordinates.closestToZero()
-
         return abs(coordinates.first) + abs(coordinates.second)
     }
-
-    private fun Pair<Int, Int>.closestToZero(): Int {
-        if(abs(first) > abs(second)) {
-            return first
-        }
-        return second
-    }
-
 }
 
 fun main() {
