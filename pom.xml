@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.3.61</kotlin.version>
+        <kotlin.version>1.4.20</kotlin.version>
     </properties>
 
     <dependencies>
@@ -55,7 +55,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>11</jvmTarget>
                 </configuration>
             </plugin>
         </plugins>
