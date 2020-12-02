@@ -44,7 +44,6 @@ class Day1 {
                         numbers.filterIndexed{ thirdIndex, _ -> thirdIndex > secondIndex }.map { third -> Triple(first, second, third) }
                     }.flatMap { it.toList() }
             }.flatMap { it.toList() }
-
     }
 
     fun Pair<Int, Int>.sum(): Int {
@@ -62,7 +61,7 @@ fun main() {
 
     val sum = 2020
 
-    val input = day1.getInput()
+    val input = day1.getInput().sorted()
 
     // PART ONE
     val result = day1.findTwoNumbersThatAddsToSum(sum, input)
