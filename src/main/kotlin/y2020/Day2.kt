@@ -42,7 +42,7 @@ class Day2 {
     }
 
     private fun isPositionPasswordValid(password: Triple<Pair<Int, Int>, Char, String>): Boolean {
-        return (password.third[password.first.first - 1 ] == password.second).xor(password.third[password.first.second -1 ] == password.second)
+        return (password.third[password.first.first - 1 ] == password.second) xor (password.third[password.first.second -1 ] == password.second)
     }
 }
 
