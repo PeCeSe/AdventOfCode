@@ -15,7 +15,7 @@ class Day5 {
         val seats = (0..8).toList()
 
         return input
-            .map { Pair(findPosition(rows, it.take(7)), findPosition(seats, it.takeLast(3))) }
+            .map { findPosition(rows, it.take(7)) to findPosition(seats, it.takeLast(3)) }
             .map { it.first * 8 + it.second }
     }
 
