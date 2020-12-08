@@ -48,13 +48,13 @@ class Day4 {
     }
 
     private fun filterInvalidValuePassports(passports: List<Map<String, String>>): List<Map<String, String>> {
-        return passports.filter { it["byr"]?.toInt() in 1920..2002 }
+        return passports.asSequence().filter { it["byr"]?.toInt() in 1920..2002 }
             .filter { it["iyr"]?.toInt() in 2010..2020 }
             .filter { it["eyr"]?.toInt() in 2020..2030 }
             .filter { validateHeight(it["hgt"]) }
             .filter { """^#([a-fA-F0-9]{6})""".toRegex().matches(it["hcl"] ?: error("oups")) }
             .filter { eyeColors.contains(it["ecl"])}
-            .filter { it["pid"]?.length == 9}
+            .filter { it["pid"]?.length == 9}.toList()
     }
 
     private fun validateHeight(height: String?): Boolean {
