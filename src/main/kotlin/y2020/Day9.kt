@@ -11,14 +11,11 @@ class Day9 {
     }
 
     fun findFirstInvalidNumber(data: List<Long>, preambleSize: Int): Long {
-        var index = preambleSize
-
-        while(index < data.size){
+        for(index in preambleSize until data.size){
             val preamble = data.subList(index - preambleSize, index)
             if(data[index] !in  sumPreamble(preamble)){
                 return data[index]
             }
-            index++
         }
         return -1
     }
