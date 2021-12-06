@@ -44,7 +44,6 @@ fun main() {
 
     // PART TWO
     val tmsw = day1.sumThreeMeasurementSlidingWindows(input)
-    // tmsw.forEach { println(it) }
     println(day1.findNumberOfIncreases(tmsw))
 
 }
